@@ -1,0 +1,6 @@
+facility_name,shelter_id,nearest_node,terrain_risk,capacity,pre_5min_km2,post_5min_km2,shrinkage_5_pct,pre_10min_km2,post_10min_km2,shrinkage_10_pct,isolated
+勝安宮,SH145,1061487893,MEDIUM,1300,7.285,3.813,47.7,16.958,11.334,33.2,False
+國風國中,SH148,3202603906,MEDIUM,800,8.385,4.29,48.8,17.371,12.046,30.7,False
+中正體育館,SH147,1056489691,MEDIUM,593,11.642,7.263,37.6,18.043,13.81,23.5,False
+花蓮縣立體育場,SH172,1056104056,MEDIUM,527,4.485,1.445,67.8,14.646,6.801,53.6,False
+私立四維高級中學,SH166,1056104019,MEDIUM,500,7.452,3.997,46.4,17.2,11.835,31.2,False
