@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b29b64da80a68b805c0cd722f678d8ea {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; left: 50px; width: 200px; height: 160px; 
+                background-color: white; border:2px solid grey; z-index:9999; 
+                font-size:14px; padding: 10px">
+    <h4>測站比較圖例</h4>
+    <i class="fa fa-circle" style="color:blue"></i> 中央氣象局測站<br>
+    <i class="fa fa-circle" style="color:red"></i> 環境部 AQI 測站<br>
+    <i class="fa fa-minus" style="color:green"></i> 匹配測站連線<br>
+    </div>
+    
+    
+            <div class="folium-map" id="map_b29b64da80a68b805c0cd722f678d8ea" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b29b64da80a68b805c0cd722f678d8ea = L.map(
+                "map_b29b64da80a68b805c0cd722f678d8ea",
+                {
+                    center: [23.8, 120.9],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_545faf52915d9cae5a56db1ce8f9ad94 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_545faf52915d9cae5a56db1ce8f9ad94.addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+            var circle_marker_c92b0aec0d9bdf341f28b67436d69677 = L.circleMarker(
+                [25.0623, 121.5254],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_202587920cd1d5566647fc2a2b1c2601 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d8d371cf8a7e8d4cdba35faa5b219028 = $(`<div id="html_d8d371cf8a7e8d4cdba35faa5b219028" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>中山 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.062300, 121.525400</p>                 <p><strong>AQI:</strong> 45</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_202587920cd1d5566647fc2a2b1c2601.setContent(html_d8d371cf8a7e8d4cdba35faa5b219028);
+            
+        
+
+        circle_marker_c92b0aec0d9bdf341f28b67436d69677.bindPopup(popup_202587920cd1d5566647fc2a2b1c2601)
+        ;
+
+        
+    
+    
+            circle_marker_c92b0aec0d9bdf341f28b67436d69677.bindTooltip(
+                `<div>
+                     中山 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd8a39d8f920660c3bbb1ea2c60b5f01 = L.circleMarker(
+                [25.0478, 121.577],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_413f05eed4930c3f484c4717339216c3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f50ea810ec1713060900ce4654ff525 = $(`<div id="html_5f50ea810ec1713060900ce4654ff525" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>松山 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.047800, 121.577000</p>                 <p><strong>AQI:</strong> 52</p>                 <p><strong>狀態:</strong> 普通</p>             </div>             </div>`)[0];
+                popup_413f05eed4930c3f484c4717339216c3.setContent(html_5f50ea810ec1713060900ce4654ff525);
+            
+        
+
+        circle_marker_bd8a39d8f920660c3bbb1ea2c60b5f01.bindPopup(popup_413f05eed4930c3f484c4717339216c3)
+        ;
+
+        
+    
+    
+            circle_marker_bd8a39d8f920660c3bbb1ea2c60b5f01.bindTooltip(
+                `<div>
+                     松山 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6b6d88859331bcc87aadb93a3be25176 = L.circleMarker(
+                [25.0263, 121.5437],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_7ee59ac29e096a74da601392546aeb9b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b588e890a5968a641fb4619876960caa = $(`<div id="html_b588e890a5968a641fb4619876960caa" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>大安 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.026300, 121.543700</p>                 <p><strong>AQI:</strong> 48</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_7ee59ac29e096a74da601392546aeb9b.setContent(html_b588e890a5968a641fb4619876960caa);
+            
+        
+
+        circle_marker_6b6d88859331bcc87aadb93a3be25176.bindPopup(popup_7ee59ac29e096a74da601392546aeb9b)
+        ;
+
+        
+    
+    
+            circle_marker_6b6d88859331bcc87aadb93a3be25176.bindTooltip(
+                `<div>
+                     大安 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_138a2f6fb1874694deb6a93f8be34a1a = L.circleMarker(
+                [25.0167, 121.528],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_3b6dfdb6b469818beccc4e6935ad211b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24c1d86c8cfb51c336250427c47028f4 = $(`<div id="html_24c1d86c8cfb51c336250427c47028f4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>古亭 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.016700, 121.528000</p>                 <p><strong>AQI:</strong> 55</p>                 <p><strong>狀態:</strong> 普通</p>             </div>             </div>`)[0];
+                popup_3b6dfdb6b469818beccc4e6935ad211b.setContent(html_24c1d86c8cfb51c336250427c47028f4);
+            
+        
+
+        circle_marker_138a2f6fb1874694deb6a93f8be34a1a.bindPopup(popup_3b6dfdb6b469818beccc4e6935ad211b)
+        ;
+
+        
+    
+    
+            circle_marker_138a2f6fb1874694deb6a93f8be34a1a.bindTooltip(
+                `<div>
+                     古亭 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87d8c063ce81282372ffc9d28bd7b99e = L.circleMarker(
+                [25.0308, 121.498],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_fba0245fb33b382517c03064582c898d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e43ee250027e80fe65d81112dbecd6e8 = $(`<div id="html_e43ee250027e80fe65d81112dbecd6e8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>萬華 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.030800, 121.498000</p>                 <p><strong>AQI:</strong> 58</p>                 <p><strong>狀態:</strong> 普通</p>             </div>             </div>`)[0];
+                popup_fba0245fb33b382517c03064582c898d.setContent(html_e43ee250027e80fe65d81112dbecd6e8);
+            
+        
+
+        circle_marker_87d8c063ce81282372ffc9d28bd7b99e.bindPopup(popup_fba0245fb33b382517c03064582c898d)
+        ;
+
+        
+    
+    
+            circle_marker_87d8c063ce81282372ffc9d28bd7b99e.bindTooltip(
+                `<div>
+                     萬華 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b01d1c62f9c4e7e1d8ce3de72d02f98 = L.circleMarker(
+                [24.9895, 121.5715],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_37c74d367f767f9b130dc1b67ddf58b1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5c5f48f672747de9edce3652a32d9b16 = $(`<div id="html_5c5f48f672747de9edce3652a32d9b16" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>文山 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 24.989500, 121.571500</p>                 <p><strong>AQI:</strong> 42</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_37c74d367f767f9b130dc1b67ddf58b1.setContent(html_5c5f48f672747de9edce3652a32d9b16);
+            
+        
+
+        circle_marker_2b01d1c62f9c4e7e1d8ce3de72d02f98.bindPopup(popup_37c74d367f767f9b130dc1b67ddf58b1)
+        ;
+
+        
+    
+    
+            circle_marker_2b01d1c62f9c4e7e1d8ce3de72d02f98.bindTooltip(
+                `<div>
+                     文山 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e24c2a43c98785f73ac750eff6f0b31e = L.circleMarker(
+                [25.0877, 121.524],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_0a4251e504d6d11782e75bb62c702d21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2690805a16288cb43cbfd24bd967d1f4 = $(`<div id="html_2690805a16288cb43cbfd24bd967d1f4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>士林 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.087700, 121.524000</p>                 <p><strong>AQI:</strong> 50</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_0a4251e504d6d11782e75bb62c702d21.setContent(html_2690805a16288cb43cbfd24bd967d1f4);
+            
+        
+
+        circle_marker_e24c2a43c98785f73ac750eff6f0b31e.bindPopup(popup_0a4251e504d6d11782e75bb62c702d21)
+        ;
+
+        
+    
+    
+            circle_marker_e24c2a43c98785f73ac750eff6f0b31e.bindTooltip(
+                `<div>
+                     士林 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0c75a1abcc8e03fbc76e8a0db16fbd55 = L.circleMarker(
+                [25.0699, 121.58],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_c52fe7ef2069fcd0f720b93f42ad6d9c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ba85e47608dadafd711419ea2def135a = $(`<div id="html_ba85e47608dadafd711419ea2def135a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>內湖 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.069900, 121.580000</p>                 <p><strong>AQI:</strong> 46</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_c52fe7ef2069fcd0f720b93f42ad6d9c.setContent(html_ba85e47608dadafd711419ea2def135a);
+            
+        
+
+        circle_marker_0c75a1abcc8e03fbc76e8a0db16fbd55.bindPopup(popup_c52fe7ef2069fcd0f720b93f42ad6d9c)
+        ;
+
+        
+    
+    
+            circle_marker_0c75a1abcc8e03fbc76e8a0db16fbd55.bindTooltip(
+                `<div>
+                     內湖 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3aa7f53f2bcb8438bfe13292741ad752 = L.circleMarker(
+                [25.0555, 121.603],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_cb4cc65c76cfe3b1f8090975f38f0500 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c1e6cde31487bfcbbb28860ca2370c4a = $(`<div id="html_c1e6cde31487bfcbbb28860ca2370c4a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>南港 (EPA)</h4>                 <p><strong>縣市:</strong> 台北市</p>                 <p><strong>座標:</strong> 25.055500, 121.603000</p>                 <p><strong>AQI:</strong> 44</p>                 <p><strong>狀態:</strong> 良好</p>             </div>             </div>`)[0];
+                popup_cb4cc65c76cfe3b1f8090975f38f0500.setContent(html_c1e6cde31487bfcbbb28860ca2370c4a);
+            
+        
+
+        circle_marker_3aa7f53f2bcb8438bfe13292741ad752.bindPopup(popup_cb4cc65c76cfe3b1f8090975f38f0500)
+        ;
+
+        
+    
+    
+            circle_marker_3aa7f53f2bcb8438bfe13292741ad752.bindTooltip(
+                `<div>
+                     南港 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d61f54019ca090a3e18e15ee3a7d30bd = L.circleMarker(
+                [25.0167, 121.462],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_b29b64da80a68b805c0cd722f678d8ea);
+        
+    
+        var popup_2f71bde5f9fbfbc5c1ae9e039b73aaf3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_822279bdb7d34271411e658926ceaff4 = $(`<div id="html_822279bdb7d34271411e658926ceaff4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>板橋 (EPA)</h4>                 <p><strong>縣市:</strong> 新北市</p>                 <p><strong>座標:</strong> 25.016700, 121.462000</p>                 <p><strong>AQI:</strong> 60</p>                 <p><strong>狀態:</strong> 普通</p>             </div>             </div>`)[0];
+                popup_2f71bde5f9fbfbc5c1ae9e039b73aaf3.setContent(html_822279bdb7d34271411e658926ceaff4);
+            
+        
+
+        circle_marker_d61f54019ca090a3e18e15ee3a7d30bd.bindPopup(popup_2f71bde5f9fbfbc5c1ae9e039b73aaf3)
+        ;
+
+        
+    
+    
+            circle_marker_d61f54019ca090a3e18e15ee3a7d30bd.bindTooltip(
+                `<div>
+                     板橋 (EPA)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

@@ -26,6 +26,8 @@ wheels/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 cache/
+RSmeasure_Archive/0311/ARIA_fixed.ipynb
+RSmeasure_Archive/0311/risk_map.html
 
 # Virtual environments
 venv/

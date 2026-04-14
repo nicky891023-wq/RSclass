@@ -1,0 +1,35 @@
+{
+  "source_api": "https://landslide.geologycloud.tw/map/api/opendata/lsdata/dislope",
+  "coordinate": "TWD97 / EPSG:3826",
+  "total_features": 19007,
+  "cities": {
+    "臺北市": 437,
+    "新北市": 3166,
+    "桃園市": 466,
+    "臺中市": 1694,
+    "臺南市": 2279,
+    "高雄市": 1102,
+    "基隆市": 525,
+    "新竹縣市": 1202,
+    "苗栗縣": 1475,
+    "南投縣": 2450,
+    "雲林縣": 124,
+    "嘉義縣市": 1273,
+    "屏東縣": 471,
+    "宜蘭縣": 622,
+    "花蓮縣": 881,
+    "臺東縣": 840
+  },
+  "fields": [
+    "geometry",
+    "C_NAME",
+    "AREA",
+    "AP_DATE",
+    "SRC_CITY"
+  ],
+  "area_unit": "m^2",
+  "outputs": {
+    "shapefile": "outputs\\dislope_shapefile\\dislope_inventory_3826_area_m2.shp",
+    "geojson": "outputs\\dislope_shapefile\\dislope_inventory_3826_area_m2.geojson"
+  }
+}

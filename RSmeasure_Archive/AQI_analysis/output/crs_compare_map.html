@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bd7b326234bd07247e98cf7554f51338 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; left: 50px; width: 200px; height: 140px; 
+                background-color: white; border:2px solid grey; z-index:9999; 
+                font-size:14px; padding: 10px">
+    <h4>座標系統比較</h4>
+    <i class="fa fa-circle" style="color:red"></i> TWD67 座標<br>
+    <i class="fa fa-circle" style="color:blue"></i> WGS84 座標<br>
+    <i class="fa fa-minus" style="color:green"></i> 距離連線<br>
+    </div>
+    
+    
+            <div class="folium-map" id="map_bd7b326234bd07247e98cf7554f51338" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bd7b326234bd07247e98cf7554f51338 = L.map(
+                "map_bd7b326234bd07247e98cf7554f51338",
+                {
+                    center: [23.8, 120.9],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b35b39905a9b2a70bcea600e2d4295c0 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b35b39905a9b2a70bcea600e2d4295c0.addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+            var circle_marker_9d8fcac19c85fec7ef43d50bfbb81b32 = L.circleMarker(
+                [25.0478, 121.517],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_9c3b7ac639a34464a29596332828bdb8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f15ba70d2a4731a9348cbb8ed7d25ad = $(`<div id="html_0f15ba70d2a4731a9348cbb8ed7d25ad" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台北 (TWD67)</h4>                 <p><strong>座標:</strong> 25.047800, 121.517000</p>                 <p><strong>與WGS84距離:</strong> 5.025 公里 (5025.3 公尺)</p>             </div>             </div>`)[0];
+                popup_9c3b7ac639a34464a29596332828bdb8.setContent(html_0f15ba70d2a4731a9348cbb8ed7d25ad);
+            
+        
+
+        circle_marker_9d8fcac19c85fec7ef43d50bfbb81b32.bindPopup(popup_9c3b7ac639a34464a29596332828bdb8)
+        ;
+
+        
+    
+    
+            circle_marker_9d8fcac19c85fec7ef43d50bfbb81b32.bindTooltip(
+                `<div>
+                     台北 (TWD67)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba24cb804f24b08e0742942699585105 = L.circleMarker(
+                [25.034, 121.5645],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_0898edf35b237720a8e5a971d740d098 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cdaca8150bafe942c831d32b4d623fdd = $(`<div id="html_cdaca8150bafe942c831d32b4d623fdd" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台北 (WGS84)</h4>                 <p><strong>座標:</strong> 25.034000, 121.564500</p>                 <p><strong>與TWD67距離:</strong> 5.025 公里 (5025.3 公尺)</p>             </div>             </div>`)[0];
+                popup_0898edf35b237720a8e5a971d740d098.setContent(html_cdaca8150bafe942c831d32b4d623fdd);
+            
+        
+
+        circle_marker_ba24cb804f24b08e0742942699585105.bindPopup(popup_0898edf35b237720a8e5a971d740d098)
+        ;
+
+        
+    
+    
+            circle_marker_ba24cb804f24b08e0742942699585105.bindTooltip(
+                `<div>
+                     台北 (WGS84)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e3f4f36d10768ca4c6185e9d6d51de75 = L.polyline(
+                [[25.0478, 121.517], [25.034, 121.5645]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_35ae3abf3f1684fce7ee2ce15d9baa8d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3e73f2165bdca9ecc231ef1ef1dfbd18 = $(`<div id="html_3e73f2165bdca9ecc231ef1ef1dfbd18" style="width: 100.0%; height: 100.0%;">距離: 5.025 公里</div>`)[0];
+                popup_35ae3abf3f1684fce7ee2ce15d9baa8d.setContent(html_3e73f2165bdca9ecc231ef1ef1dfbd18);
+            
+        
+
+        poly_line_e3f4f36d10768ca4c6185e9d6d51de75.bindPopup(popup_35ae3abf3f1684fce7ee2ce15d9baa8d)
+        ;
+
+        
+    
+    
+            var circle_marker_e6ef89e2a69e0035ef99393622d79b46 = L.circleMarker(
+                [24.1477, 120.6736],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_1a33c36bdb7606ebe3282cc8b7a42aa8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8677ecc4853bd8b960e0875178f68054 = $(`<div id="html_8677ecc4853bd8b960e0875178f68054" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台中 (TWD67)</h4>                 <p><strong>座標:</strong> 24.147700, 120.673600</p>                 <p><strong>與WGS84距離:</strong> 4.949 公里 (4948.5 公尺)</p>             </div>             </div>`)[0];
+                popup_1a33c36bdb7606ebe3282cc8b7a42aa8.setContent(html_8677ecc4853bd8b960e0875178f68054);
+            
+        
+
+        circle_marker_e6ef89e2a69e0035ef99393622d79b46.bindPopup(popup_1a33c36bdb7606ebe3282cc8b7a42aa8)
+        ;
+
+        
+    
+    
+            circle_marker_e6ef89e2a69e0035ef99393622d79b46.bindTooltip(
+                `<div>
+                     台中 (TWD67)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2d90fc0a168665ad8034a8543fa7aef4 = L.circleMarker(
+                [24.134, 120.72],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_178c60b252262ca60c5670348a89a524 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ae3546af44b6b2564845b44f8c8b3146 = $(`<div id="html_ae3546af44b6b2564845b44f8c8b3146" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台中 (WGS84)</h4>                 <p><strong>座標:</strong> 24.134000, 120.720000</p>                 <p><strong>與TWD67距離:</strong> 4.949 公里 (4948.5 公尺)</p>             </div>             </div>`)[0];
+                popup_178c60b252262ca60c5670348a89a524.setContent(html_ae3546af44b6b2564845b44f8c8b3146);
+            
+        
+
+        circle_marker_2d90fc0a168665ad8034a8543fa7aef4.bindPopup(popup_178c60b252262ca60c5670348a89a524)
+        ;
+
+        
+    
+    
+            circle_marker_2d90fc0a168665ad8034a8543fa7aef4.bindTooltip(
+                `<div>
+                     台中 (WGS84)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_6b71188c0cc46906877306add9c9493c = L.polyline(
+                [[24.1477, 120.6736], [24.134, 120.72]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_ba5e0e5adb7f5747b905b792e9b19a67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf6c8e565fd19f554f3d7be7ff379951 = $(`<div id="html_cf6c8e565fd19f554f3d7be7ff379951" style="width: 100.0%; height: 100.0%;">距離: 4.949 公里</div>`)[0];
+                popup_ba5e0e5adb7f5747b905b792e9b19a67.setContent(html_cf6c8e565fd19f554f3d7be7ff379951);
+            
+        
+
+        poly_line_6b71188c0cc46906877306add9c9493c.bindPopup(popup_ba5e0e5adb7f5747b905b792e9b19a67)
+        ;
+
+        
+    
+    
+            var circle_marker_511c7668ced87c4631d66df84a948f43 = L.circleMarker(
+                [22.6273, 120.3014],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_d11daeaaa3cef5e5bf448c109d9c1b59 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_10f13a059f7c8f769df325fa6f00c054 = $(`<div id="html_10f13a059f7c8f769df325fa6f00c054" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>高雄 (TWD67)</h4>                 <p><strong>座標:</strong> 22.627300, 120.301400</p>                 <p><strong>與WGS84距離:</strong> 5.040 公里 (5040.5 公尺)</p>             </div>             </div>`)[0];
+                popup_d11daeaaa3cef5e5bf448c109d9c1b59.setContent(html_10f13a059f7c8f769df325fa6f00c054);
+            
+        
+
+        circle_marker_511c7668ced87c4631d66df84a948f43.bindPopup(popup_d11daeaaa3cef5e5bf448c109d9c1b59)
+        ;
+
+        
+    
+    
+            circle_marker_511c7668ced87c4631d66df84a948f43.bindTooltip(
+                `<div>
+                     高雄 (TWD67)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4af2f76350d58cc389ba0af4e4ec7215 = L.circleMarker(
+                [22.613, 120.348],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_fd6631c31d688f096a151180b6505616 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_55b2a83201e34b262e6fe7647c9fe8a4 = $(`<div id="html_55b2a83201e34b262e6fe7647c9fe8a4" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>高雄 (WGS84)</h4>                 <p><strong>座標:</strong> 22.613000, 120.348000</p>                 <p><strong>與TWD67距離:</strong> 5.040 公里 (5040.5 公尺)</p>             </div>             </div>`)[0];
+                popup_fd6631c31d688f096a151180b6505616.setContent(html_55b2a83201e34b262e6fe7647c9fe8a4);
+            
+        
+
+        circle_marker_4af2f76350d58cc389ba0af4e4ec7215.bindPopup(popup_fd6631c31d688f096a151180b6505616)
+        ;
+
+        
+    
+    
+            circle_marker_4af2f76350d58cc389ba0af4e4ec7215.bindTooltip(
+                `<div>
+                     高雄 (WGS84)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3efacd4b41d49044e58be52386b57f56 = L.polyline(
+                [[22.6273, 120.3014], [22.613, 120.348]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_8277f2c20809f9f7a4c51f4824cae2ff = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0417fa0812ae077b7c822a05d0cdd39d = $(`<div id="html_0417fa0812ae077b7c822a05d0cdd39d" style="width: 100.0%; height: 100.0%;">距離: 5.040 公里</div>`)[0];
+                popup_8277f2c20809f9f7a4c51f4824cae2ff.setContent(html_0417fa0812ae077b7c822a05d0cdd39d);
+            
+        
+
+        poly_line_3efacd4b41d49044e58be52386b57f56.bindPopup(popup_8277f2c20809f9f7a4c51f4824cae2ff)
+        ;
+
+        
+    
+    
+            var circle_marker_321d9232e858a929d7759fb621d5875d = L.circleMarker(
+                [23.8224, 121.5474],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_823507e32cc1a006422ff66b9d26de05 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a0356bd66f72847214caaefadd0658ea = $(`<div id="html_a0356bd66f72847214caaefadd0658ea" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>花蓮 (TWD67)</h4>                 <p><strong>座標:</strong> 23.822400, 121.547400</p>                 <p><strong>與WGS84距離:</strong> 5.004 公里 (5003.6 公尺)</p>             </div>             </div>`)[0];
+                popup_823507e32cc1a006422ff66b9d26de05.setContent(html_a0356bd66f72847214caaefadd0658ea);
+            
+        
+
+        circle_marker_321d9232e858a929d7759fb621d5875d.bindPopup(popup_823507e32cc1a006422ff66b9d26de05)
+        ;
+
+        
+    
+    
+            circle_marker_321d9232e858a929d7759fb621d5875d.bindTooltip(
+                `<div>
+                     花蓮 (TWD67)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a28f94d559f9ddd489a2e440904b370b = L.circleMarker(
+                [23.808, 121.594],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_178714a4ba56aa318dd4b84cf1d522a2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f4716d049571b94003ec469742a43b8 = $(`<div id="html_6f4716d049571b94003ec469742a43b8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>花蓮 (WGS84)</h4>                 <p><strong>座標:</strong> 23.808000, 121.594000</p>                 <p><strong>與TWD67距離:</strong> 5.004 公里 (5003.6 公尺)</p>             </div>             </div>`)[0];
+                popup_178714a4ba56aa318dd4b84cf1d522a2.setContent(html_6f4716d049571b94003ec469742a43b8);
+            
+        
+
+        circle_marker_a28f94d559f9ddd489a2e440904b370b.bindPopup(popup_178714a4ba56aa318dd4b84cf1d522a2)
+        ;
+
+        
+    
+    
+            circle_marker_a28f94d559f9ddd489a2e440904b370b.bindTooltip(
+                `<div>
+                     花蓮 (WGS84)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bc151d03ff1c2efed0e93bf3870dbf32 = L.polyline(
+                [[23.8224, 121.5474], [23.808, 121.594]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_0f2a5e558b9868361b6f49f6dc161a30 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb7fe56d8307d04c94f2d1e330047ba8 = $(`<div id="html_bb7fe56d8307d04c94f2d1e330047ba8" style="width: 100.0%; height: 100.0%;">距離: 5.004 公里</div>`)[0];
+                popup_0f2a5e558b9868361b6f49f6dc161a30.setContent(html_bb7fe56d8307d04c94f2d1e330047ba8);
+            
+        
+
+        poly_line_bc151d03ff1c2efed0e93bf3870dbf32.bindPopup(popup_0f2a5e558b9868361b6f49f6dc161a30)
+        ;
+
+        
+    
+    
+            var circle_marker_13b9b73bd38ec5edc5eaa6a5de07ef87 = L.circleMarker(
+                [22.7598, 121.1607],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_c96b7cdbf0f0e2ab182eac52fb015172 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f3e18a6cbdbff4eb60c6f07308c1c57a = $(`<div id="html_f3e18a6cbdbff4eb60c6f07308c1c57a" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台東 (TWD67)</h4>                 <p><strong>座標:</strong> 22.759800, 121.160700</p>                 <p><strong>與WGS84距離:</strong> 5.025 公里 (5024.8 公尺)</p>             </div>             </div>`)[0];
+                popup_c96b7cdbf0f0e2ab182eac52fb015172.setContent(html_f3e18a6cbdbff4eb60c6f07308c1c57a);
+            
+        
+
+        circle_marker_13b9b73bd38ec5edc5eaa6a5de07ef87.bindPopup(popup_c96b7cdbf0f0e2ab182eac52fb015172)
+        ;
+
+        
+    
+    
+            circle_marker_13b9b73bd38ec5edc5eaa6a5de07ef87.bindTooltip(
+                `<div>
+                     台東 (TWD67)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27725b34263223ab6de3fced2b1dd9b6 = L.circleMarker(
+                [22.745, 121.207],
+                {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_ad4c2beffa32002931866e7c6fd9ffc8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_afde7700ae2a95281906676338af4154 = $(`<div id="html_afde7700ae2a95281906676338af4154" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial, sans-serif;">                 <h4>台東 (WGS84)</h4>                 <p><strong>座標:</strong> 22.745000, 121.207000</p>                 <p><strong>與TWD67距離:</strong> 5.025 公里 (5024.8 公尺)</p>             </div>             </div>`)[0];
+                popup_ad4c2beffa32002931866e7c6fd9ffc8.setContent(html_afde7700ae2a95281906676338af4154);
+            
+        
+
+        circle_marker_27725b34263223ab6de3fced2b1dd9b6.bindPopup(popup_ad4c2beffa32002931866e7c6fd9ffc8)
+        ;
+
+        
+    
+    
+            circle_marker_27725b34263223ab6de3fced2b1dd9b6.bindTooltip(
+                `<div>
+                     台東 (WGS84)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_91721b434c613cc0b6127bc7a124abd2 = L.polyline(
+                [[22.7598, 121.1607], [22.745, 121.207]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_bd7b326234bd07247e98cf7554f51338);
+        
+    
+        var popup_8a74fbd692233fc485e2e077befaf170 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8761bb0aeb21e7c36dfb4c44edf8a34d = $(`<div id="html_8761bb0aeb21e7c36dfb4c44edf8a34d" style="width: 100.0%; height: 100.0%;">距離: 5.025 公里</div>`)[0];
+                popup_8a74fbd692233fc485e2e077befaf170.setContent(html_8761bb0aeb21e7c36dfb4c44edf8a34d);
+            
+        
+
+        poly_line_91721b434c613cc0b6127bc7a124abd2.bindPopup(popup_8a74fbd692233fc485e2e077befaf170)
+        ;
+
+        
+    
+</script>
+</html>

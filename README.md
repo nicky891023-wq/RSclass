@@ -78,6 +78,10 @@ Solution: The workflow archives the projected network to `Week7_Output/data/hual
 - Post item: `S2B_MSIL2A_20251016T022559_R046_T51QUG_20251016T042804`
 - Barrier lake area: 0.517 km²
 - Landslide source area: 3.423 km²
+
+## RSmeasure Archive
+
+Older weekly source folders from `C:\Users\Wade\Desktop\ClassPhD\RSmeasure` are now archived under `RSmeasure_Archive/`, including `0303`, `0311`, `0322`, `0331`, `0407_upload`, `AQI_analysis`, and `ref`. This keeps the newer integrated workflow at the repo root while still preserving the original week-by-week materials in one GitHub repository.
 - Debris flow area: 8.537 km²
 
 ### Coverage Gap Discussion
