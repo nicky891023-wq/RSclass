@@ -1,0 +1,45 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files
+*.csv
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.zip
+
+# Output files
+*.png
+*.json
+*.html
+
+# Homework 4 outputs (exceptions)
+!hw_ex*.png
+!hw_dem.tif
+!terrain_risk_*.png
+!terrain_risk_audit.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/

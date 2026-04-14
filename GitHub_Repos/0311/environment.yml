@@ -1,0 +1,22 @@
+name: aria-project
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - geopandas>=0.13.0
+  - folium>=0.14.0
+  - mapclassify>=2.5.0
+  - python-dotenv>=1.0.0
+  - pandas>=1.5.0
+  - matplotlib>=3.6.0
+  - seaborn>=0.12.0
+  - numpy>=1.21.0
+  - shapely>=1.8.0
+  - fiona>=1.8.0
+  - pyproj>=3.3.0
+  - requests>=2.28.0
+  - jupyter>=1.0.0
+  - pip
+  - pip:
+    - -r requirements.txt
