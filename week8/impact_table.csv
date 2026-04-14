@@ -1,0 +1,41 @@
+﻿asset,asset_name,type,location,W4_terrain_risk,W7_centrality_rank,Barrier Lake Hit,Landslide Hit,Debris Flow Hit,Notes
+Guangfu_Station,光復火車站,W8 Guangfu Overlay,光復火車站,—,—,N,N,Y,downstream critical node
+Guangfu_Township_Office,光復鄉公所,W8 Guangfu Overlay,光復鄉公所,—,—,N,N,Y,downstream critical node
+Foxu_Debris_Zone,佛祖街沉積區中心,W8 Guangfu Overlay,佛祖街沉積區中心,—,—,N,N,Y,downstream critical node
+Guangfu_Fire_Station,光復消防分隊,W8 Guangfu Overlay,光復消防分隊,—,—,N,N,Y,downstream critical node
+SH000,主農社區活動中心,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH001,中正國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH002,中原國小文中三國中預定地,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH003,花蓮城隍廟香客大樓,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH004,忠孝國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH005,主權社區活動中心,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH006,中正體育館,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH007,國風國中,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH008,明義國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH009,花蓮市公所,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH010,國立花蓮農業職業學校,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH011,花蓮高商,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH012,南美崙營區,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH013,中華國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH014,鑄強國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH015,明廉國小,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH016,"慈濟大學附設國民中學,小學",W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH017,美崙國中,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH018,自強國中,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH019,花蓮高工,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH020,慈濟大學人文社會學院,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH021,私立四維高級中學,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH022,行政院國軍退除役官兵輔導委員會花,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH023,民孝社區活動中心,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH024,大陳二村活動中心,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH025,花蓮縣立體育場,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH026,花蓮港天宮,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+SH027,國福社區活動中心,W3 Shelter,Hualien City,LOW,—,N,N,N,outside event area
+Node_1119847832,Node_1119847832,W7 Bottleneck,Hualien City corridor,LOW,1,N,N,N,north of Guangfu event corridor
+Node_3202799287,Node_3202799287,W7 Bottleneck,Hualien City corridor,LOW,2,N,N,N,north of Guangfu event corridor
+Node_601584086,Node_601584086,W7 Bottleneck,Hualien City corridor,LOW,3,N,N,N,north of Guangfu event corridor
+Node_906775386,Node_906775386,W7 Bottleneck,Hualien City corridor,LOW,4,N,N,N,north of Guangfu event corridor
+Node_906775240,Node_906775240,W7 Bottleneck,Hualien City corridor,LOW,5,N,N,N,north of Guangfu event corridor
+Guangfu_Elementary,光復國小,W8 Guangfu Overlay,光復國小,—,—,N,N,N,watch list
+Mataian_Hwy9_Bridge,台9線馬太鞍溪橋,W8 Guangfu Overlay,台9線馬太鞍溪橋,—,—,N,N,N,watch list
+Hualien_Sugar_Factory,花蓮觀光糖廠,W8 Guangfu Overlay,花蓮觀光糖廠,—,—,N,N,N,watch list

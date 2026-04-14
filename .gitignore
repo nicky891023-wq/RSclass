@@ -25,6 +25,7 @@ wheels/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
+cache/
 
 # Virtual environments
 venv/

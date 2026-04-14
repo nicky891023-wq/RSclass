@@ -1,0 +1,81 @@
+{
+  "candidates": {
+    "pre": [
+      {
+        "id": "S2A_MSIL2A_20250615T023141_R046_T51QUG_20250615T070417",
+        "cloud_cover": 8.501057,
+        "datetime": "2025-06-15T02:31:41.024000+00:00"
+      },
+      {
+        "id": "S2B_MSIL2A_20250608T022529_R046_T51QUG_20250608T042638",
+        "cloud_cover": 35.251239,
+        "datetime": "2025-06-08T02:25:29.024000+00:00"
+      },
+      {
+        "id": "S2A_MSIL2A_20250705T023141_R046_T51QUG_20250705T075420",
+        "cloud_cover": 36.641845,
+        "datetime": "2025-07-05T02:31:41.024000+00:00"
+      }
+    ],
+    "mid": [
+      {
+        "id": "S2C_MSIL2A_20250911T022551_R046_T51QUG_20250911T055914",
+        "cloud_cover": 13.519251,
+        "datetime": "2025-09-11T02:25:51.025000+00:00"
+      },
+      {
+        "id": "S2B_MSIL2A_20250817T022539_R046_T51QUG_20250817T042827",
+        "cloud_cover": 17.585771,
+        "datetime": "2025-08-17T02:25:39.024000+00:00"
+      },
+      {
+        "id": "S2B_MSIL2A_20250906T022529_R046_T51QUG_20250906T042640",
+        "cloud_cover": 28.460217,
+        "datetime": "2025-09-06T02:25:29.024000+00:00"
+      }
+    ],
+    "post": [
+      {
+        "id": "S2B_MSIL2A_20251016T022559_R046_T51QUG_20251016T042804",
+        "cloud_cover": 2.543064,
+        "datetime": "2025-10-16T02:25:59.024000+00:00"
+      },
+      {
+        "id": "S2C_MSIL2A_20251001T022551_R046_T51QUG_20251001T055313",
+        "cloud_cover": 6.756122,
+        "datetime": "2025-10-01T02:25:51.025000+00:00"
+      },
+      {
+        "id": "S2B_MSIL2A_20251006T022529_R046_T51QUG_20251006T042653",
+        "cloud_cover": 13.276078,
+        "datetime": "2025-10-06T02:25:29.024000+00:00"
+      }
+    ]
+  },
+  "chosen_items": {
+    "pre": "S2A_MSIL2A_20250615T023141_R046_T51QUG_20250615T070417",
+    "mid": "S2C_MSIL2A_20250911T022551_R046_T51QUG_20250911T055914",
+    "post": "S2B_MSIL2A_20251016T022559_R046_T51QUG_20251016T042804"
+  },
+  "lake_threshold": 0.18,
+  "lake_area_km2": 0.5168599446796401,
+  "landslide_area_km2": 3.4229969943119363,
+  "debris_area_km2": 8.536590061545594,
+  "landslide_best_thresholds": {
+    "nir_drop_min": 0.1,
+    "swir_post_min": 0.2,
+    "TP": 9.0,
+    "FP": 0.0,
+    "TN": 10.0,
+    "FN": 1.0,
+    "precision": 1.0,
+    "recall": 0.9,
+    "f1": 0.947
+  },
+  "coverage_gap": {
+    "w3_hits": 0,
+    "w7_hits": 0,
+    "guangfu_hits": 4
+  },
+  "operational_brief": "Chief of Operations Brief: Sentinel-2 confirms a three-act disaster sequence over Matai'an Creek. The June 15, 2025 pre-scene shows an intact forested valley; the September 11, 2025 mid-scene shows a turbid barrier lake of about 0.517 km² near the verified lake center; and the October 16, 2025 post-scene shows the drained lake basin, an upstream landslide scar of 3.423 km², and a downstream debris footprint of 8.537 km² extending into Guangfu. If ARIA v5.0 had been operational between July 21 and September 23, the clean revisits in early and mid-September could have triggered a persistent-lake warning, flagged the blocked valley, and elevated the bridge and township corridor for UAV confirmation. The coverage-gap result is decisive: the Hualien City shelter and bottleneck layers stay outside the impact zone, while Guangfu overlay nodes carry the post-breach hits. For the next 24 hours, prioritize Highway 9 clearance, station-area access, school resupply, and UAV mapping of the source scar; 4 audited assets already intersect the debris footprint. Before the next barrier-lake event, ARIA should add a standing south-Hualien critical-node layer and an automated lake-growth alert built from recurring optical or SAR scenes."
+}

@@ -1,208 +1,91 @@
-# ARIA v3.0 - 動態風險監測系統
+# ARIA v4.0 - Week 7 Disaster Accessibility Analysis
 
-## 🎯 系統概述
+This repository now includes a completed Week 7 workflow for road-network disaster accessibility analysis in Hualien. The solution extends the earlier shelter, terrain, rainfall, and kriging work into a network-based accessibility model.
 
-ARIA v3.0 是一個全自動區域受災衝擊評估系統，整合了即時雨量監測與避難所風險評估，能夠回答「現在哪裡最危險？」的關鍵問題。
+## Main Deliverables
 
-## 📋 系統需求
+- `ARIA_v4.ipynb`: Week 7 notebook that runs the integrated workflow
+- `week7_aria_v4.py`: reusable analysis module used by the notebook
+- `Week7_Output/data/hualien_network.graphml`: cached OSMnx road network after first successful run
+- `Week7_Output/tables/accessibility_impact_table.csv`: before/after accessibility table
+- `Week7_Output/tables/top5_bottlenecks.csv`: Top 5 bottleneck nodes with terrain proxy
+- `Week7_Output/figures/top5_bottlenecks.png`: bottleneck map
+- `Week7_Output/figures/isochrone_before_after.png`: isochrone comparison
+- `Week7_Output/ai_strategy_prompt.txt`: AI strategy briefing prompt
 
-### Python 環境
-- Python 3.9+
-- Conda 環境推薦
+## Week 7 Workflow
 
-### 必要套件
+1. Load Hualien shelter data from `避難收容處所點位檔案v9 (1).csv`
+2. Rebuild a Week 4 style terrain-risk proxy from shelter coordinates
+3. Load or fetch the Hualien road network with OSMnx and archive it as GraphML
+4. Compute edge travel time from road length and inferred speed
+5. Calculate betweenness centrality and extract Top 5 bottleneck nodes
+6. Sample Week 6 kriging rainfall from `Week6_Lab/kriging_rainfall.tif` at road-segment midpoints
+7. Convert rainfall to congestion and remove near-impassable links
+8. Compare 5-minute and 10-minute isochrone areas for five key shelters
+9. Export tables, figures, and an AI command-center briefing prompt
+
+## Running the Notebook
+
 ```bash
-conda create -n aria_v3 python=3.9
-conda activate aria_v3
-pip install -r requirements.txt
+python create_week7_notebook.py
+jupyter notebook ARIA_v4.ipynb
 ```
 
-或使用 conda 環境檔案：
-```bash
-conda env create -f environment.yml
-conda activate aria_v3
-```
+If the cached GraphML file does not exist, the first run will try to download road data from OpenStreetMap through OSMnx. Later runs load the cached `hualien_network.graphml` directly.
 
-## 🚀 快速開始
+## Configuration
 
-### 1. 環境設定
-```bash
-# 建立並啟動 conda 環境
-conda create -n aria_v3 python=3.9
-conda activate aria_v3
+Week 7 parameters are stored in `.env`. The key values are:
 
-# 安裝必要套件
-pip install -r requirements.txt
-```
+- `WEEK7_PLACE_NAME`
+- `WEEK7_GRAPHML_PATH`
+- `WEEK7_RASTER_PATH`
+- `WEEK7_RAINFALL_JSON`
+- `ROAD_BREAK_CF`
+- `WEEK7_FACILITY_COUNT`
 
-### 2. 設定環境變數
-複製並編輯 `.env` 檔案：
-```bash
-# .env 檔案範例
-APP_MODE=SIMULATION
-CWA_API_KEY=your-cwa-api-key-here
-TARGET_COUNTY=花蓮縣
-BUFFER_HIGH_RAIN=5000
-RAINFALL_CRITICAL=80
-RAINFALL_URGENT=40
-```
+## AI Diagnostic Log
 
-### 3. 執行系統
-```bash
-# 啟動 Jupyter Notebook
-jupyter notebook
+### Missing road speed attributes
 
-# 開啟並執行 ARIA_v3.ipynb
-```
+Problem: OSM road segments often do not include a usable `maxspeed` value.
 
-## 📁 檔案結構
+Solution: `week7_aria_v4.py` parses numeric values when present, converts mph to km/h when needed, and falls back to a road-type default dictionary.
 
-```
-0324/
-├── ARIA_v3.ipynb              # 完整系統主程式
-├── Week5-Student.ipynb        # 學生練習版本
-├── Homework-Week5.md          # 作業說明文件
-├── .env                       # 環境變數設定
-├── requirements.txt           # Python 套件清單
-├── environment.yml            # Conda 環境檔案
-├── fungwong_202511.json      # 鳳凰颱風模擬資料
-├── 避難收容處所點位檔案v9 (1).csv  # 避難所資料
-├── TOWN_MOI_1120317.*        # 鄉鎮界線圖
-├── riverpoly/                 # 河川資料
-└── output/                    # 系統輸出檔案
-    ├── ARIA_v3_Fungwong.html  # 互動式監測地圖
-    └── shelter_risk_audit_week5.json  # 風險稽核資料
-```
+### Kriging raster sampling may return nodata
 
-## 🎯 核心功能
+Problem: Edge midpoints can land on raster nodata cells.
 
-### 1. 即時雨量監測
-- **LIVE 模式**：連接 CWA 即時雨量 API
-- **SIMULATION 模式**：載入鳳凰颱風歷史資料
-- **Fallback 機制**：API 失敗自動切換
+Solution: The workflow samples the kriging raster at each edge midpoint and fills missing values with the median sampled rainfall to keep the network fully weighted.
 
-### 2. 動態風險評估
-- **CRITICAL**：時雨量 > 80mm 影響範圍內
-- **URGENT**：時雨量 > 40mm 且地形風險 HIGH
-- **WARNING**：時雨量 > 40mm 或地形風險 HIGH
-- **SAFE**：其餘情況
+### Network isolation after road breaks
 
-### 3. 空間疊合分析
-- 5km 雨量影響範圍 Buffer
-- 避難所與雨量站空間疊合
-- CRS 坐標系統自動轉換
+Problem: Once high-congestion links are treated as broken roads, some facilities may lose access to the largest connected component.
 
-### 4. 互動式視覺化
-- Folium 動態地圖
-- 多圖層控制
-- 豐富 Popup 資訊
-- 雨量熱力圖
+Solution: The workflow builds a disaster graph with removed edges, then flags a facility as isolated when it falls outside the largest connected component or its 10-minute post-disaster isochrone collapses to a near-zero area.
 
-## 🔧 技術規格
+### OSMnx network download repeat cost
 
-### 坐標系統
-- **分析用**：EPSG:3826 (TWD97/TM2)
-- **視覺化用**：EPSG:4326 (WGS84)
+Problem: Re-downloading the same road network is slow and brittle.
 
-### 資料來源
-- **避難所**：內政部避難收容處所點位檔案
-- **雨量資料**：中央氣象署 O-A0002-001 API
-- **地理資料**：國土測繪中心鄉鎮市區界
+Solution: The workflow archives the projected network to `Week7_Output/data/hualien_network.graphml` and reuses it in later runs.
 
-### API 整合
-- **CWA 雨量 API**：https://opendata.cwa.gov.tw/
-- **環境部 API**：已整合金鑰設定
+## Week 8 - ARIA v5.0 Matai'an Three-Act Auditor
 
-## 📊 系統輸出
+- Pre item: `S2A_MSIL2A_20250615T023141_R046_T51QUG_20250615T070417`
+- Mid item: `S2C_MSIL2A_20250911T022551_R046_T51QUG_20250911T055914`
+- Post item: `S2B_MSIL2A_20251016T022559_R046_T51QUG_20251016T042804`
+- Barrier lake area: 0.517 km²
+- Landslide source area: 3.423 km²
+- Debris flow area: 8.537 km²
 
-### 1. 互動式地圖
-- 檔案：`output/ARIA_v3_Fungwong.html`
-- 功能：即時風險監測儀表板
-- 圖層：雨量站、避難所、影響範圍、熱力圖
+### Coverage Gap Discussion
 
-### 2. 風險稽核報告
-- 檔案：`output/shelter_risk_audit_week5.json`
-- 內容：詳細風險分析統計
-- 格式：JSON 結構化資料
+The Week 3 shelter layer and Week 7 bottlenecks both remain concentrated in the Hualien City corridor north of Matai'an. In this Week 8 audit, those legacy assets record zero direct debris-flow hits, while the Guangfu overlay captures the downstream assets exposed by the Sep 23, 2025 breach. The key lesson is that ARIA's pre-event footprint was operationally useful for Hualien City, but it did not extend far enough south to cover Guangfu's critical nodes.
 
-### 3. 分析統計
-- 動態風險分佈
-- 受影響避難所統計
-- 雨量站分析報告
+### AI Diagnostic Log
 
-## 🚨 AI 診斷日誌
-
-### 已解決的技術挑戰
-
-#### 1. CRS 坐標系統對齊問題
-**問題**：空間疊合分析時，雨量站與避難所的 CRS 不一致導致 sjoin 結果為空
-**解決**：在分析前將所有資料統一轉換為 EPSG:3826，確保空間計算準確性
-
-#### 2. CWA API 與 CoLife 資料格式差異
-**問題**：兩種資料來源的 JSON 結構略有不同，特別是坐標資料的格式
-**解決**：建立 `normalize_cwa_json()` 函數，自動偵測並統一處理不同格式
-
-#### 3. Folium 坐標順序問題
-**問題**：Folium 使用 [latitude, longitude] 順序，與 GIS 常見的 [longitude, latitude] 不同
-**解決**：在建立地圖標記時特別注意坐標順序轉換
-
-#### 4. 動態風險分級邏輯實作
-**問題**：需要同時考慮雨量強度與地形風險的複合評估
-**解決**：按照作業要求實作四級風險分類系統 (CRITICAL/URGENT/WARNING/SAFE)
-
-## 🎯 使用場景
-
-### 1. 災害監測
-- 即時監控颱風、暴雨等極端天氣
-- 動態評估避難所風險狀況
-- 提供決策支援資訊
-
-### 2. 應變指揮
-- 識別高風險避難所
-- 優先資源分配
-- 疏散路線規劃
-
-### 3. 歷史分析
-- 過去災害事件重現
-- 風險模式分析
-- 系統效能驗證
-
-## 📞 技術支援
-
-### 常見問題
-
-#### Q: Jupyter Kernel 找不到 aria_v3 環境？
-A: 確認已正確啟動 conda 環境：
-```bash
-conda activate aria_v3
-python -m ipykernel install --user --name aria_v3 --display-name "Python (aria_v3)"
-```
-
-#### Q: API 呼叫失敗？
-A: 檢查 `.env` 檔案中的 API 金鑰設定，或切換至 SIMULATION 模式。
-
-#### Q: 地圖顯示異常？
-A: 確認所有必要套件已正確安裝，特別是 `folium` 和 `branca`。
-
-## 📈 效能指標
-
-- **資料處理速度**：< 30 秒
-- **地圖載入時間**：< 10 秒
-- **API 回應時間**：< 5 秒
-- **記憶體使用量**：< 2GB
-
-## 🎯 系統限制
-
-1. **資料範圍**：目前僅支援台灣地區
-2. **更新頻率**：LIVE 模式依 API 限制
-3. **瀏覽器相容性**：建議使用 Chrome、Firefox
-
-## 📝 授權資訊
-
-- **開發單位**：ARIA 開發團隊
-- **資料來源**：中央氣象署、內政部、環境部
-- **授權條款**：教育研究使用
-
----
-
-**ARIA v3.0 - 讓災害監測更智能、更即時、更準確** 🎯
+- Mid-event STAC window: I compared the top three low-cloud candidates and selected the Sep 11, 2025 scene because it lines up with the reported peak lake size while keeping the Matai'an valley readable.
+- Barrier-lake false positives: River-shadow noise dropped substantially after combining the turbid-water threshold with a west-of-121.33°E spatial gate.
+- Landslide false positives: River sandbars triggered SWIR brightness, so I kept the `pre_B08 > 0.25` vegetation gate and tuned thresholds against a small truth set rather than relying on a single baseline pair.
