@@ -31,7 +31,7 @@ Confidence would improve with river gauge records, disaster reports, UAV imagery
 
 ### Reflection
 
-The LLM response is useful because it does not pretend that zero high-confidence area means zero flood risk. It correctly treats SAR-only detections as a reconnaissance priority under complete cloud cover. The weakness is that the summary metrics do not contain village names, road segments, or population exposure, so the briefing cannot specify exact evacuation sites. I would use it as an incident-command triage memo and then overlay the map with roads, settlements, shelters, and live field reports.
+The response is useful because it does not pretend that zero high-confidence area means zero flood risk. It correctly treats SAR-only detections as a reconnaissance priority under complete cloud cover. Its weakness is that the summary metrics do not contain village names, road segments, or population exposure, so the briefing cannot specify exact evacuation sites. I would use it as an incident-command triage memo and then overlay the map with roads, settlements, shelters, and live field reports.
 
 ## ARIA v7.0 vs. v6.0 Comparison
 

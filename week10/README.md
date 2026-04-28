@@ -31,3 +31,22 @@ This folder contains the Week 10 classroom practice and homework submission for 
 ## Interpretation
 
 The selected Sentinel-2 optical scene is fully cloud-covered, so ARIA v7.0 correctly produces no high-confidence dual-sensor pixels. The key result is the SAR-only cloudy class: Sentinel-1 still detects 0.934 km2 of flood-like water candidates, then the DEM slope audit flags 0.613 km2 as likely terrain-related artifacts. This demonstrates the Week 10 lesson: SAR does not replace validation, but it keeps the disaster assessment alive when optical imagery is unusable.
+
+## How to Read the Figures
+
+| Figure | What it means | How it was produced |
+|---|---|---|
+| `task1_sar_detection_panel.png` | Shows raw SAR, filtered SAR, binary flood mask, and overlay. It demonstrates that the final water candidate map comes from filtered low-backscatter SAR pixels, not from raw noisy SAR. | Sentinel-1 RTC VV -> dB conversion -> 5 x 5 median filter -> `VV < -18 dB` -> morphology and connected-component cleanup. |
+| `task2_confidence_map.png` | Shows ARIA v7.0 confidence classes. In this run, cloud cover is 100%, so there is no high-confidence optical-plus-SAR class; the operational class is SAR Only (Cloudy). | SAR water mask + Sentinel-2 NDWI mask + Sentinel-2 SCL cloud mask -> four-class fusion rule. |
+| `task3_topographic_audit.png` | Shows the fusion result before audit, DEM-derived slope, and post-audit result. It explains why some dark SAR detections are physically suspicious on steep slopes. | Fusion map + Copernicus DEM slope -> flag flood detections where slope > 25 degrees. |
+
+## Operation History
+
+1. Checked for local `S1_Hualien_dB.tif`; it was not present.
+2. Streamed Sentinel-1 RTC VV from Planetary Computer for the Hualien BBOX.
+3. Converted SAR linear backscatter to dB and applied median filtering.
+4. Extracted SAR flood-like water with `VV < -18 dB`.
+5. Loaded Sentinel-2 L2A and created NDWI plus SCL cloud masks.
+6. Fused SAR, NDWI, and cloud mask into four confidence classes.
+7. Loaded Copernicus DEM, calculated slope, and flagged slope > 25 degrees as likely false-positive terrain artifacts.
+8. Generated figures, tables, AI briefing, and the final notebook report.
