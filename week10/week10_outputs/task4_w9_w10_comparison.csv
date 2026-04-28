@@ -1,0 +1,5 @@
+Metric,W9 Optical Only,W10 Fused,Improvement
+Total detected flood/change area,33.346 km2,0.934 km2,-32.412 km2
+Cloud-covered area analyzed,0 km2,0.934 km2 SAR-only class,cloud gaps audited by SAR
+False positives handled,phantom water removed by SCL,0.613 km2 flagged by slope,adds terrain audit
+Confidence levels,3-zone,4-class + false-positive flag,finer triage

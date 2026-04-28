@@ -1,0 +1,5 @@
+class,code,pixels,area_km2
+No Detection,0,616810,555.129
+Optical Only,1,0,0.0
+SAR Only (Cloudy),2,1038,0.9341999999999999
+High Confidence,3,0,0.0

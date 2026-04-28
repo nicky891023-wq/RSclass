@@ -1,0 +1,13 @@
+metric,value
+SAR date,2025-09-18
+SAR source,S1A_IW_GRDH_1SDV_20250918T100123_20250918T100148_061041_079B51_rtc
+Orbit,ascending
+SAR threshold dB,-18.0
+NDWI threshold,0.0
+Cloud cover percent,100.0
+SAR flood pixels,1038
+SAR flood area km2,0.934
+Mean flood backscatter dB,-19.62
+High confidence km2,0.0
+SAR-only cloudy km2,0.934
+False positive removed km2,0.613

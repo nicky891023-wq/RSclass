@@ -1,0 +1,4 @@
+slope_class,removed_pixels,removed_km2
+25-35 deg,104,0.0936
+35-45 deg,108,0.0972
+>45 deg,469,0.4221
