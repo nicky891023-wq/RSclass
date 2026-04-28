@@ -32,6 +32,14 @@ This folder contains the Week 10 classroom practice and homework submission for 
 
 The selected Sentinel-2 optical scene is fully cloud-covered, so ARIA v7.0 correctly produces no high-confidence dual-sensor pixels. The key result is the SAR-only cloudy class: Sentinel-1 still detects 0.934 km2 of flood-like water candidates, then the DEM slope audit flags 0.613 km2 as likely terrain-related artifacts. This demonstrates the Week 10 lesson: SAR does not replace validation, but it keeps the disaster assessment alive when optical imagery is unusable.
 
+## Course Key Points
+
+- **SAR all-weather observation:** Sentinel-1 uses microwave radar, so it can provide evidence when Sentinel-2 optical imagery is blocked by typhoon clouds.
+- **Backscatter physics:** Smooth water often appears dark in VV dB because specular reflection sends energy away from the sensor.
+- **Speckle control:** Raw SAR should not be thresholded directly. The workflow applies a 5 x 5 median filter before extracting `VV < -18 dB` water candidates.
+- **Sensor fusion:** High Confidence requires both SAR and non-cloudy NDWI evidence. Under 100% cloud cover, the honest class is SAR Only (Cloudy), not High Confidence.
+- **Topographic audit:** SAR dark pixels on steep slopes may be radar shadow, layover, or foreshortening rather than water. DEM slope > 25 degrees is used as a false-positive warning.
+
 ## How to Read the Figures
 
 | Figure | What it means | How it was produced |
