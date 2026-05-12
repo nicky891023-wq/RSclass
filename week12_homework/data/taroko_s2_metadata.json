@@ -1,0 +1,43 @@
+{
+  "item_id": "S2B_MSIL2A_20240404T022529_R046_T51QUG_20240404T063438",
+  "datetime": "2024-04-04T02:25:29.024000+00:00",
+  "cloud_cover": 16.860856,
+  "platform": "Sentinel-2B",
+  "search_label": "strict post-earthquake",
+  "source": "Microsoft Planetary Computer STAC",
+  "bbox_wgs84": [
+    121.4,
+    24.1,
+    121.8,
+    24.25
+  ],
+  "target_crs": "EPSG:32651",
+  "target_resolution_m": 20,
+  "utm_bounds": [
+    337374.09321642574,
+    2665819.578362662,
+    378177.71050154476,
+    2682837.1567114727
+  ],
+  "height": 851,
+  "width": 2041,
+  "valid_pixels": 1256573,
+  "valid_percent": 72.34610577174963,
+  "bands": [
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "B11",
+    "B12"
+  ],
+  "scl_masked_values": [
+    0,
+    1,
+    3,
+    8,
+    9,
+    10,
+    11
+  ]
+}

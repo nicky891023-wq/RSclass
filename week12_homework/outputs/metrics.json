@@ -1,0 +1,400 @@
+{
+  "config": {
+    "name": "Notebook final rerun",
+    "roi_target": 1050,
+    "patch_radius": 5,
+    "max_patches": 16,
+    "rf_estimators": 300,
+    "rf_min_leaf": 1,
+    "note": "Executed notebook rerun after three script quality cycles.",
+    "final": true
+  },
+  "sentinel": {
+    "item_id": "S2B_MSIL2A_20240404T022529_R046_T51QUG_20240404T063438",
+    "datetime": "2024-04-04T02:25:29.024000+00:00",
+    "cloud_cover": 16.860856,
+    "platform": "Sentinel-2B",
+    "search_label": "strict post-earthquake",
+    "source": "Microsoft Planetary Computer STAC",
+    "bbox_wgs84": [
+      121.4,
+      24.1,
+      121.8,
+      24.25
+    ],
+    "target_crs": "EPSG:32651",
+    "target_resolution_m": 20,
+    "utm_bounds": [
+      337374.09321642574,
+      2665819.578362662,
+      378177.71050154476,
+      2682837.1567114727
+    ],
+    "height": 851,
+    "width": 2041,
+    "valid_pixels": 1256573,
+    "valid_percent": 72.34610577174963,
+    "bands": [
+      "B02",
+      "B03",
+      "B04",
+      "B08",
+      "B11",
+      "B12"
+    ],
+    "scl_masked_values": [
+      0,
+      1,
+      3,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "roi_diagnostics": {
+    "candidate_pixels_before_relax": {
+      "Water": 548780,
+      "Forest": 211430,
+      "Bare/Landslide": 4791,
+      "Built-up": 384246,
+      "Cropland": 236668
+    },
+    "roi_pixels": {
+      "Water": 1116,
+      "Forest": 1058,
+      "Cropland": 1136,
+      "Bare/Landslide": 597,
+      "Built-up": 938
+    },
+    "selected_centers": {
+      "Water": 10,
+      "Forest": 12,
+      "Bare/Landslide": 16,
+      "Built-up": 16,
+      "Cropland": 12
+    },
+    "quantiles": {
+      "ndvi20": -0.014089242555201054,
+      "ndvi35": -0.006387638859450817,
+      "ndvi55": 0.3251786530017853,
+      "ndvi70": 0.4315279424190521,
+      "visible45": 0.16557864844799042,
+      "visible60": 0.17068980634212494,
+      "visible75": 0.18216820061206818,
+      "swir60": 0.26693493127822876,
+      "swir75": 0.29320961236953735,
+      "nir25": 0.15378519892692566,
+      "ndbi60": -0.02112625725567341
+    }
+  },
+  "kmeans": {
+    "cluster_table": [
+      {
+        "cluster": 0,
+        "pixel_count": 552620,
+        "Blue": 0.18710976839065552,
+        "Green": 0.1692417562007904,
+        "Red": 0.15916381776332855,
+        "NIR": 0.15591765940189362,
+        "SWIR1": 0.15258654952049255,
+        "SWIR2": 0.1430020034313202,
+        "interpreted_label": "Built-up or bright bare / 建物或亮裸地",
+        "reason": "NDBI=-0.01, visible=0.17"
+      },
+      {
+        "cluster": 1,
+        "pixel_count": 229401,
+        "Blue": 0.1915757954120636,
+        "Green": 0.20642070472240448,
+        "Red": 0.18629568815231323,
+        "NIR": 0.41909652948379517,
+        "SWIR1": 0.312166690826416,
+        "SWIR2": 0.22626829147338867,
+        "interpreted_label": "Cropland or grass / 農田或草生地",
+        "reason": "NDVI=0.38 is moderate"
+      },
+      {
+        "cluster": 2,
+        "pixel_count": 78041,
+        "Blue": 0.27143391966819763,
+        "Green": 0.2800106704235077,
+        "Red": 0.2676086723804474,
+        "NIR": 0.4200739562511444,
+        "SWIR1": 0.36268150806427,
+        "SWIR2": 0.29375210404396057,
+        "interpreted_label": "Bare/Landslide / 裸地或崩塌",
+        "reason": "NDVI=0.22, SWIR1=0.36"
+      },
+      {
+        "cluster": 3,
+        "pixel_count": 388077,
+        "Blue": 0.14343948662281036,
+        "Green": 0.16202354431152344,
+        "Red": 0.14191026985645294,
+        "NIR": 0.3958258330821991,
+        "SWIR1": 0.2678149342536926,
+        "SWIR2": 0.1841106116771698,
+        "interpreted_label": "Cropland or grass / 農田或草生地",
+        "reason": "NDVI=0.47 is moderate"
+      },
+      {
+        "cluster": 4,
+        "pixel_count": 8434,
+        "Blue": 0.47226476669311523,
+        "Green": 0.4746766984462738,
+        "Red": 0.47013166546821594,
+        "NIR": 0.5944203734397888,
+        "SWIR1": 0.5481196641921997,
+        "SWIR2": 0.4750898778438568,
+        "interpreted_label": "Bare/Landslide / 裸地或崩塌",
+        "reason": "NDVI=0.12, SWIR1=0.55"
+      }
+    ],
+    "sample_n": 120000,
+    "valid_n": 1256573
+  },
+  "rf": {
+    "roi_counts": {
+      "Water": 1116,
+      "Forest": 1072,
+      "Cropland": 1154,
+      "Bare/Landslide": 598,
+      "Built-up": 941
+    },
+    "train_sample_count": 4881,
+    "test_accuracy": 0.9385749385749386,
+    "oob_score": 0.9448087431693989,
+    "macro_f1": 0.929726692242326,
+    "weighted_f1": 0.9387947261686208,
+    "macro_weighted_gap": 0.00906803392629485,
+    "oob_test_gap": -0.006233804594460324,
+    "feature_importance": {
+      "Blue": 0.19785611211398677,
+      "Green": 0.10410479743259024,
+      "Red": 0.17618948031475798,
+      "NIR": 0.18803631647155455,
+      "SWIR1": 0.15099478263749938,
+      "SWIR2": 0.1828185110296111
+    },
+    "confusion_matrix": [
+      [
+        279,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        259,
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        15,
+        270,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        135,
+        15
+      ],
+      [
+        0,
+        0,
+        2,
+        30,
+        203
+      ]
+    ],
+    "classification_report": {
+      "Water": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 279.0
+      },
+      "Forest": {
+        "precision": 0.9452554744525548,
+        "recall": 0.9664179104477612,
+        "f1-score": 0.955719557195572,
+        "support": 268.0
+      },
+      "Cropland": {
+        "precision": 0.9608540925266904,
+        "recall": 0.9342560553633218,
+        "f1-score": 0.9473684210526315,
+        "support": 289.0
+      },
+      "Bare/Landslide": {
+        "precision": 0.8181818181818182,
+        "recall": 0.9,
+        "f1-score": 0.8571428571428571,
+        "support": 150.0
+      },
+      "Built-up": {
+        "precision": 0.9144144144144144,
+        "recall": 0.8638297872340426,
+        "f1-score": 0.888402625820569,
+        "support": 235.0
+      },
+      "accuracy": 0.9385749385749386,
+      "macro avg": {
+        "precision": 0.9277411599150955,
+        "recall": 0.9329007506090251,
+        "f1-score": 0.929726692242326,
+        "support": 1221.0
+      },
+      "weighted avg": {
+        "precision": 0.9399098771565588,
+        "recall": 0.9385749385749386,
+        "f1-score": 0.9387947261686208,
+        "support": 1221.0
+      }
+    },
+    "classification_report_text": "                precision    recall  f1-score   support\n\n         Water       1.00      1.00      1.00       279\n        Forest       0.95      0.97      0.96       268\n      Cropland       0.96      0.93      0.95       289\nBare/Landslide       0.82      0.90      0.86       150\n      Built-up       0.91      0.86      0.89       235\n\n      accuracy                           0.94      1221\n     macro avg       0.93      0.93      0.93      1221\n  weighted avg       0.94      0.94      0.94      1221\n"
+  },
+  "swcb": {
+    "tp": 143,
+    "fp": 4901,
+    "fn": 11632,
+    "tn": 1239897,
+    "precision": 0.028350515463917526,
+    "recall": 0.012144373673036094,
+    "iou": 0.008575197889182058,
+    "swcb_pixel_area_ha": 471.0,
+    "rf_bare_landslide_area_ha": 201.76,
+    "swcb_polygon_count": 1216,
+    "swcb_kml": "data\\20240802新生崩塌地.kml",
+    "swcb_source": {
+      "source_url": "https://data.ardswc.gov.tw/Data/OpenData/OpenDataDetail?sid=697",
+      "mvt_url_pattern": "https://gis.ardswc.gov.tw/api/ardswc/vectortiles/shp/event_landslide_inventories/{z}/{y}/{x}.pbf",
+      "zoom": 14,
+      "tile_count": 171,
+      "polygon_count": 1213,
+      "event_names": [
+        "0403花蓮地震",
+        "0629豪雨",
+        "凱米颱風",
+        "山陀兒颱風",
+        "康芮颱風"
+      ],
+      "reported_area_ha_sum": 950.2601667972119,
+      "note": "Google Drive homework link was checked locally but returned the Week12 notebook JSON; official ARDSWC MVT was used instead."
+    }
+  },
+  "area_stats": [
+    {
+      "class_id": 0,
+      "class_en": "Water",
+      "class_zh": "水體",
+      "pixels": 542261,
+      "area_ha": 21690.44,
+      "area_km2": 216.90439999999998,
+      "percent_valid": 43.15395922083317
+    },
+    {
+      "class_id": 1,
+      "class_en": "Forest",
+      "class_zh": "森林",
+      "pixels": 347101,
+      "area_ha": 13884.04,
+      "area_km2": 138.84040000000002,
+      "percent_valid": 27.62282812061058
+    },
+    {
+      "class_id": 2,
+      "class_en": "Cropland",
+      "class_zh": "農田/草生地",
+      "pixels": 241125,
+      "area_ha": 9645.0,
+      "area_km2": 96.45,
+      "percent_valid": 19.189096057292335
+    },
+    {
+      "class_id": 3,
+      "class_en": "Bare/Landslide",
+      "class_zh": "裸地/崩塌",
+      "pixels": 5044,
+      "area_ha": 201.76,
+      "area_km2": 2.0176,
+      "percent_valid": 0.4014092297065113
+    },
+    {
+      "class_id": 4,
+      "class_en": "Built-up",
+      "class_zh": "建物/都市",
+      "pixels": 121042,
+      "area_ha": 4841.68,
+      "area_km2": 48.4168,
+      "percent_valid": 9.632707371557403
+    }
+  ],
+  "validation": {
+    "status": "PASS",
+    "checks": [
+      {
+        "name": "kmeans_classification.png",
+        "ok": true,
+        "detail": "791,025 bytes, image_std=73.69"
+      },
+      {
+        "name": "rf_classification.png",
+        "ok": true,
+        "detail": "758,312 bytes, image_std=78.31"
+      },
+      {
+        "name": "confusion_matrix.png",
+        "ok": true,
+        "detail": "64,458 bytes, image_std=61.17"
+      },
+      {
+        "name": "swcb_overlay.png",
+        "ok": true,
+        "detail": "1,641,134 bytes, image_std=82.76"
+      },
+      {
+        "name": "class_area_stats.csv",
+        "ok": true,
+        "detail": "413 bytes"
+      },
+      {
+        "name": "area_stats_sum",
+        "ok": true,
+        "detail": "sum=100.000"
+      },
+      {
+        "name": "training_kmz_exists",
+        "ok": true,
+        "detail": "C:\\Users\\Wade\\Desktop\\ClassPhD\\RSmeasure\\0512\\homework_week12\\data\\taroko_training_rois.kmz"
+      },
+      {
+        "name": "swcb_kml_exists",
+        "ok": true,
+        "detail": "C:\\Users\\Wade\\Desktop\\ClassPhD\\RSmeasure\\0512\\homework_week12\\data\\20240802新生崩塌地.kml"
+      },
+      {
+        "name": "roi_class_coverage",
+        "ok": true,
+        "detail": "{\"Water\": 1116, \"Forest\": 1072, \"Cropland\": 1154, \"Bare/Landslide\": 598, \"Built-up\": 941}"
+      },
+      {
+        "name": "oob_test_gap",
+        "ok": true,
+        "detail": "-0.006"
+      },
+      {
+        "name": "swcb_reference_nonempty",
+        "ok": true,
+        "detail": "1216 polygons"
+      }
+    ]
+  }
+}

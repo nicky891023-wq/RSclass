@@ -1,0 +1,16 @@
+{
+  "source_url": "https://data.ardswc.gov.tw/Data/OpenData/OpenDataDetail?sid=697",
+  "mvt_url_pattern": "https://gis.ardswc.gov.tw/api/ardswc/vectortiles/shp/event_landslide_inventories/{z}/{y}/{x}.pbf",
+  "zoom": 14,
+  "tile_count": 171,
+  "polygon_count": 1213,
+  "event_names": [
+    "0403花蓮地震",
+    "0629豪雨",
+    "凱米颱風",
+    "山陀兒颱風",
+    "康芮颱風"
+  ],
+  "reported_area_ha_sum": 950.2601667972119,
+  "note": "Google Drive homework link was checked locally but returned the Week12 notebook JSON; official ARDSWC MVT was used instead."
+}
