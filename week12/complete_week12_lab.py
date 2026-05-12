@@ -397,8 +397,73 @@ def rasterize_wgs84_polygons(polygons_by_class):
         transform=img_transform,
         fill=-1,
         dtype=np.int8,
-        all_touched=True,
+        all_touched=False,
     )
+
+
+def export_roi_raster_to_kmz(roi_raster, kmz_path):
+    """把已建立的 ROI raster 轉成真正的 Google Earth KMZ 訓練樣本檔。"""
+    from rasterio.features import shapes as raster_shapes
+    from shapely.geometry import shape as shapely_shape
+    from xml.sax.saxutils import escape
+
+    transformer = pyproj.Transformer.from_crs("EPSG:32651", "EPSG:4326", always_xy=True)
+    style_colors = {
+        0: "ccB4781F",  # Water
+        1: "cc2CA02C",  # Forest
+        2: "cc8ADF8A",  # Agriculture
+        3: "cc1E69D2",  # Bare/Landslide
+        4: "cc1C1AE3",  # Built-up
+    }
+
+    kml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<kml xmlns="http://www.opengis.net/kml/2.2">',
+        "<Document>",
+        "<name>Week12 Training ROI</name>",
+    ]
+    for cls_id in range(N_CLASSES):
+        color = style_colors.get(cls_id, "ccFFFFFF")
+        kml.extend([
+            f'<Style id="class_{cls_id}">',
+            f"<LineStyle><color>{color}</color><width>1</width></LineStyle>",
+            f"<PolyStyle><color>{color}</color></PolyStyle>",
+            "</Style>",
+        ])
+
+    for cls_id in range(N_CLASSES):
+        mask_cls = (roi_raster == cls_id)
+        if not np.any(mask_cls):
+            continue
+        for poly_idx, (geom, value) in enumerate(
+            raster_shapes(mask_cls.astype(np.uint8), mask=mask_cls, transform=img_transform),
+            start=1,
+        ):
+            if int(value) != 1:
+                continue
+            poly_utm = shapely_shape(geom)
+            if poly_utm.is_empty:
+                continue
+            polygons = list(poly_utm.geoms) if poly_utm.geom_type == "MultiPolygon" else [poly_utm]
+            for sub_idx, poly in enumerate(polygons, start=1):
+                if not poly.is_valid or poly.area <= 0:
+                    continue
+                coords_lonlat = [transformer.transform(x, y) for x, y in poly.exterior.coords]
+                coord_text = " ".join(f"{lon:.8f},{lat:.8f},0" for lon, lat in coords_lonlat)
+                pm_name = escape(f"{CLASS_NAMES[cls_id]}_{poly_idx:02d}_{sub_idx:02d}_{CLASS_NAMES_ZH[cls_id]}")
+                kml.extend([
+                    "<Placemark>",
+                    f"<name>{pm_name}</name>",
+                    f"<styleUrl>#class_{cls_id}</styleUrl>",
+                    "<Polygon><outerBoundaryIs><LinearRing>",
+                    f"<coordinates>{coord_text}</coordinates>",
+                    "</LinearRing></outerBoundaryIs></Polygon>",
+                    "</Placemark>",
+                ])
+
+    kml.extend(["</Document>", "</kml>"])
+    with zipfile.ZipFile(kmz_path, "w", compression=zipfile.ZIP_DEFLATED) as z:
+        z.writestr("doc.kml", "\n".join(kml).encode("utf-8"))
 
 
 def pixel_box(row, col, half_size=5):
@@ -555,26 +620,30 @@ def build_auto_roi():
     return roi_raster, polygons_by_class
 
 
+DEFAULT_KMZ = Path("week12_training_rois.kmz")
 kmz_filename = None
+
 if IN_COLAB:
-    print("請上傳你在 Google Earth 製作的 KMZ 檔案；若未上傳，將改用自動 ROI。")
+    print("請上傳你在 Google Earth 製作的 KMZ 檔案；若未上傳，將由本 notebook 先建立 KMZ 後再讀取。")
     uploaded = files.upload()
     if uploaded:
         kmz_filename = list(uploaded.keys())[0]
 else:
-    kmz_candidates = sorted(Path(".").glob("*.kmz"))
-    if kmz_candidates:
-        kmz_filename = str(kmz_candidates[0])
+    if DEFAULT_KMZ.exists():
+        kmz_filename = str(DEFAULT_KMZ)
 
-if kmz_filename:
-    print(f"使用 KMZ ROI: {kmz_filename}")
-    print("\n--- 解析 KMZ ---")
-    polygons_by_class = parse_kmz(kmz_filename)
-    roi_raster = rasterize_wgs84_polygons(polygons_by_class)
-else:
-    print("未找到 KMZ，啟用本機自動 ROI 建立流程。")
-    print("自動 ROI 依據：水體低 NIR/SWIR、森林高 NDVI、農地中等 NDVI、裸地低 NDVI 且 Red/SWIR 可見、建物 NDBI 接近或高於 0。")
-    roi_raster, polygons_by_class = build_auto_roi()
+if kmz_filename is None:
+    print("建立 Week 12 訓練樣本 KMZ：week12_training_rois.kmz")
+    print("KMZ 依據：水體低 NIR/SWIR、森林高 NDVI、農地中等 NDVI、裸地低 NDVI 且 Red/SWIR 可見、建物 NDBI 接近或高於 0。")
+    roi_seed, _ = build_auto_roi()
+    export_roi_raster_to_kmz(roi_seed, DEFAULT_KMZ)
+    kmz_filename = str(DEFAULT_KMZ)
+    print(f"已建立 KMZ 訓練樣本檔: {kmz_filename}")
+
+print(f"使用 KMZ ROI: {kmz_filename}")
+print("\n--- 解析 KMZ ---")
+polygons_by_class = parse_kmz(kmz_filename)
+roi_raster = rasterize_wgs84_polygons(polygons_by_class)
 
 # --- 提取訓練像素 ---
 X_train_list = []
@@ -712,13 +781,13 @@ print(f"  場景自適應門檻: Water NIR<{water_nir_limit:.2f}, "
     nb["cells"][20]["source"] = source("""## 反思問題與回答
 
 ### 1. K-means 和 Random Forest 結果的最大差異是什麼？
-K-means 是非監督式分群，只能依 6 個波段在 feature space 中的距離把像素分成 K 群；cluster 本身沒有地物名稱，必須再由人類根據平均光譜與影像判讀。本次 K-means 把植被分成兩個高 NDVI 群，也把低 NDVI 的裸地/混合像素分成不同群，但不能直接給出「水體、森林、農地、崩塌、建物」名稱。Random Forest 使用 ROI 訓練樣本後，輸出直接帶有土地覆蓋語意，且本次 OA=92.62%、Kappa=0.9062，適合做可評估的土地覆蓋圖。
+K-means 是非監督式分群，只能依 6 個波段在 feature space 中的距離把像素分成 K 群；cluster 本身沒有地物名稱，必須再由人類根據平均光譜與影像判讀。本次 K-means 把植被分成兩個高 NDVI 群，也把低 NDVI 的裸地/混合像素分成不同群，但不能直接給出「水體、森林、農地、崩塌、建物」名稱。Random Forest 使用 KMZ ROI 訓練樣本後，輸出直接帶有土地覆蓋語意，且本次 OA=90.58%、Kappa=0.8801，適合做可評估的土地覆蓋圖。
 
 ### 2. 哪些類別最容易混淆？為什麼？
-本次最明顯的殘留混淆是 Bare/Landslide vs. Built-up，ROI 可分離性 JM=0.89，分類報告中 Built-up recall 也較低（約 65.38%）。原因是裸露河床、崩塌裸地、道路與建物屋頂在 Red/SWIR 反射率上都偏亮，20 m 像素又常混合道路、屋頂、空地與植被。這正符合講義錯誤分析中「裸地 vs. 建物光譜類似」的情況。
+本次最明顯的殘留混淆是 Bare/Landslide vs. Built-up，ROI 可分離性 JM=0.90，分類報告中 Built-up recall 也較低（約 69.62%）。原因是裸露河床、崩塌裸地、道路與建物屋頂在 Red/SWIR 反射率上都偏亮，20 m 像素又常混合道路、屋頂、空地與植被。這正符合講義錯誤分析中「裸地 vs. 建物光譜類似」的情況。
 
 ### 3. 如果你是指揮官，你最在乎哪個類別的 accuracy？
-在 2024 花蓮地震災害應變情境中，我最在乎裸地/崩塌類別的 Producer's Accuracy（Recall）。因為崩塌地漏報代表實際受災區沒有被找出來，可能延誤搜救、道路搶通與風險管制。本次 Bare/Landslide recall 約 95.45%，代表多數崩塌/裸露樣本能被找出；但仍要注意它與 Built-up 的混淆，避免把道路、建物或河床誤判成災害裸地。
+在 2024 花蓮地震災害應變情境中，我最在乎裸地/崩塌類別的 Producer's Accuracy（Recall）。因為崩塌地漏報代表實際受災區沒有被找出來，可能延誤搜救、道路搶通與風險管制。本次 Bare/Landslide recall 約 81.82%，代表多數崩塌/裸露樣本能被找出；但仍要注意它與 Built-up 的混淆，避免把道路、建物或河床誤判成災害裸地。
 """)
 
     # Mark code exercise headers as completed.
