@@ -100,3 +100,128 @@
 | oob_test_gap | PASS | -0.006 |
 | swcb_reference_nonempty | PASS | 1216 polygons |
 
+## notebook_final_rerun
+
+- Note: Notebook final rerun using cached Sentinel-2 and official SWCB KML.
+- ROI target/radius/max patches: 1050 / 5 / 16
+- RF trees/min leaf: 300 / 1
+- Test accuracy: 0.939
+- OOB score: 0.945
+- Macro F1 / Weighted F1: 0.930 / 0.939
+- SWCB IoU / precision / recall: 0.009 / 0.028 / 0.012
+- Validation: PASS
+
+| Check | Status | Detail |
+|---|---:|---|
+| kmeans_classification.png | PASS | 791,025 bytes, image_std=73.69 |
+| rf_classification.png | PASS | 758,312 bytes, image_std=78.31 |
+| confusion_matrix.png | PASS | 64,458 bytes, image_std=61.17 |
+| swcb_overlay.png | PASS | 1,641,134 bytes, image_std=82.76 |
+| class_area_stats.csv | PASS | 413 bytes |
+| area_stats_sum | PASS | sum=100.000 |
+| training_kmz_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\taroko_training_rois.kmz |
+| swcb_kml_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\20240802新生崩塌地.kml |
+| roi_class_coverage | PASS | {"Water": 1116, "Forest": 1072, "Cropland": 1154, "Bare/Landslide": 598, "Built-up": 941} |
+| oob_test_gap | PASS | -0.006 |
+| swcb_reference_nonempty | PASS | 1216 polygons |
+
+## notebook_final_rerun
+
+- Note: Notebook final rerun using cached Sentinel-2 and official SWCB KML.
+- ROI target/radius/max patches: 1050 / 5 / 16
+- RF trees/min leaf: 300 / 1
+- Test accuracy: 0.939
+- OOB score: 0.945
+- Macro F1 / Weighted F1: 0.930 / 0.939
+- SWCB IoU / precision / recall: 0.009 / 0.028 / 0.012
+- Validation: PASS
+
+| Check | Status | Detail |
+|---|---:|---|
+| kmeans_classification.png | PASS | 791,025 bytes, image_std=73.69 |
+| rf_classification.png | PASS | 758,312 bytes, image_std=78.31 |
+| confusion_matrix.png | PASS | 64,458 bytes, image_std=61.17 |
+| swcb_overlay.png | PASS | 1,641,134 bytes, image_std=82.76 |
+| class_area_stats.csv | PASS | 413 bytes |
+| area_stats_sum | PASS | sum=100.000 |
+| training_kmz_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\taroko_training_rois.kmz |
+| swcb_kml_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\20240802新生崩塌地.kml |
+| roi_class_coverage | PASS | {"Water": 1116, "Forest": 1072, "Cropland": 1154, "Bare/Landslide": 598, "Built-up": 941} |
+| oob_test_gap | PASS | -0.006 |
+| swcb_reference_nonempty | PASS | 1216 polygons |
+
+## Notebook final rerun
+
+- Note: Executed notebook rerun after three script quality cycles.
+- ROI target/radius/max patches: 1050 / 5 / 16
+- RF trees/min leaf: 300 / 1
+- Test accuracy: 0.939
+- OOB score: 0.945
+- Macro F1 / Weighted F1: 0.930 / 0.939
+- SWCB IoU / precision / recall: 0.009 / 0.028 / 0.012
+- Validation: PASS
+
+| Check | Status | Detail |
+|---|---:|---|
+| kmeans_classification.png | PASS | 791,025 bytes, image_std=73.69 |
+| rf_classification.png | PASS | 758,312 bytes, image_std=78.31 |
+| confusion_matrix.png | PASS | 64,458 bytes, image_std=61.17 |
+| swcb_overlay.png | PASS | 1,641,134 bytes, image_std=82.76 |
+| class_area_stats.csv | PASS | 413 bytes |
+| area_stats_sum | PASS | sum=100.000 |
+| training_kmz_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\taroko_training_rois.kmz |
+| swcb_kml_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\20240802新生崩塌地.kml |
+| roi_class_coverage | PASS | {"Water": 1116, "Forest": 1072, "Cropland": 1154, "Bare/Landslide": 598, "Built-up": 941} |
+| oob_test_gap | PASS | -0.006 |
+| swcb_reference_nonempty | PASS | 1216 polygons |
+
+## notebook_final_rerun
+
+- Note: Notebook final rerun using cached Sentinel-2 and official SWCB KML.
+- ROI target/radius/max patches: 1050 / 5 / 16
+- RF trees/min leaf: 300 / 1
+- Test accuracy: 0.939
+- OOB score: 0.945
+- Macro F1 / Weighted F1: 0.930 / 0.939
+- SWCB IoU / precision / recall: 0.009 / 0.028 / 0.012
+- Validation: PASS
+
+| Check | Status | Detail |
+|---|---:|---|
+| kmeans_classification.png | PASS | 791,025 bytes, image_std=73.69 |
+| rf_classification.png | PASS | 758,312 bytes, image_std=78.31 |
+| confusion_matrix.png | PASS | 64,458 bytes, image_std=61.17 |
+| swcb_overlay.png | PASS | 1,641,134 bytes, image_std=82.76 |
+| class_area_stats.csv | PASS | 413 bytes |
+| area_stats_sum | PASS | sum=100.000 |
+| training_kmz_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\taroko_training_rois.kmz |
+| swcb_kml_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\20240802新生崩塌地.kml |
+| roi_class_coverage | PASS | {"Water": 1116, "Forest": 1072, "Cropland": 1154, "Bare/Landslide": 598, "Built-up": 941} |
+| oob_test_gap | PASS | -0.006 |
+| swcb_reference_nonempty | PASS | 1216 polygons |
+
+## Notebook final rerun
+
+- Note: Executed notebook rerun after three script quality cycles.
+- ROI target/radius/max patches: 1050 / 5 / 16
+- RF trees/min leaf: 300 / 1
+- Test accuracy: 0.939
+- OOB score: 0.945
+- Macro F1 / Weighted F1: 0.930 / 0.939
+- SWCB IoU / precision / recall: 0.009 / 0.028 / 0.012
+- Validation: PASS
+
+| Check | Status | Detail |
+|---|---:|---|
+| kmeans_classification.png | PASS | 791,025 bytes, image_std=73.69 |
+| rf_classification.png | PASS | 758,312 bytes, image_std=78.31 |
+| confusion_matrix.png | PASS | 64,458 bytes, image_std=61.17 |
+| swcb_overlay.png | PASS | 1,641,134 bytes, image_std=82.76 |
+| class_area_stats.csv | PASS | 413 bytes |
+| area_stats_sum | PASS | sum=100.000 |
+| training_kmz_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\taroko_training_rois.kmz |
+| swcb_kml_exists | PASS | C:\Users\Wade\Desktop\ClassPhD\RSmeasure\0512\homework_week12\data\20240802新生崩塌地.kml |
+| roi_class_coverage | PASS | {"Water": 1116, "Forest": 1072, "Cropland": 1154, "Bare/Landslide": 598, "Built-up": 941} |
+| oob_test_gap | PASS | -0.006 |
+| swcb_reference_nonempty | PASS | 1216 polygons |
+

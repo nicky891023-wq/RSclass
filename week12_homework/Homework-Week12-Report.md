@@ -7,7 +7,7 @@
 ## Data And Workflow
 
 - Sentinel-2 item: `S2B_MSIL2A_20240404T022529_R046_T51QUG_20240404T063438`，來源：Microsoft Planetary Computer STAC。
-- 有效像元：1,256,573 pixels（72.3%）。
+- 有效像元：1,256,573 pixels（72.3%）；已套用 SCL cloud/shadow/snow mask，排除 SCL [0, 1, 3, 8, 9, 10, 11] 與異常反射率像元。
 - 訓練 ROI：`data/taroko_training_rois.kmz`，由本機流程建立後重新以 KMZ workflow 解析，不直接拿 mask 跳過。
 - 獨立驗證資料：`data/20240802新生崩塌地.kml`，由 ARDSWC 官方事件型崩塌 MVT 服務轉出；作業 Google Drive 連結經檢查回傳 Week12 notebook JSON，因此改採官方 OpenData/MVT 來源。
 
@@ -48,6 +48,8 @@ Feature importance:
 
 K-means 與 RF 的差異在於：K-means 僅依光譜自然分群，能探索未知類別但語意不穩定；RF 使用 KMZ ROI 將類別固定成水體、森林、農田/草生地、裸地/崩塌、建物/都市，因此更符合災後土地覆蓋圖的需求。
 
+Blue 在本次 RF 中排名最高，推測與研究區同時包含海域、山區陰影、亮裸土與道路/建物有關；短波段對水體與明亮裸露地的反差敏感，因此有助於把水體、亮裸地與都市類別拉開。不過 Blue 也容易受大氣與薄雲影響，所以仍需搭配 NIR、SWIR1、SWIR2 解讀，而不宜單獨作為崩塌判釋依據。
+
 ## Task 3: Accuracy And SWCB Validation
 
 ROI confusion matrix:
@@ -78,6 +80,8 @@ SWCB landslide validation:
 
 RF 的裸地/崩塌類比官方崩塌多，主因是 Sentinel-2 20 m 像元會將河床、道路開挖面、亮裸土與崩塌混合。SWCB polygons 來自較高解析影像判釋，且僅標崩塌，不包含一般裸地，因此 precision/IoU 不宜直接解讀成 RF 全分類品質，而應視為崩塌熱區篩選能力。
 
+OOB accuracy (0.945) 與 test accuracy (0.939) 差距僅 0.006，Macro/Weighted F1 gap 為 0.009，低於 0.03；各類 test support 皆大於 30 pixels，因此內部驗證相對穩定。外部 SWCB 驗證顯著較低，顯示模型在 ROI 類別內表現良好，但「裸地/崩塌」對官方崩塌清冊的語意與尺度轉換仍不足。FN 多半會集中在小面積或窄長邊坡崩塌、山區陰影及雲/陰影遮罩附近，這些位置在 20 m Sentinel-2 影像中容易被森林或裸地背景稀釋。
+
 ## Task 4: Area Statistics And AI Report
 
 |   class_id | class_en       | class_zh    |   pixels |   area_ha |   area_km2 |   percent_valid |
@@ -94,7 +98,7 @@ RF 的裸地/崩塌類比官方崩塌多，主因是 Sentinel-2 20 m 像元會�
 
 ### Critical Evaluation
 
-本次成果符合 ARIA v8.0 從「閾值偵測」升級到「多類別分類器」的精神：同時利用六波段資訊與 ROI 訓練樣本，能產出可支援面積統計、路網風險篩選與避難所周邊環境判讀的分類圖。然而限制也很明確：ROI 為本機自動 KMZ 流程產生，雖經光譜與空間條件檢核，但仍不等同人工 Google Earth 判釋；山區陰影、河床與崩塌光譜接近，20 m 混合像元會提高誤判；官方崩塌資料與 Sentinel-2 日期、解析度、標註定義不同，造成 FN/FP。後續可加入 DEM slope/aspect、SAR coherence、道路距離與人工修訂 ROI 改善。
+AI briefing 中引用的森林、裸地/崩塌、水體、建物/都市面積與 accuracy/OOB/SWCB IoU 均已和前述統計表及 metrics.json 核對，未發現新增類別或任意改寫數值；不確定性描述也合理指出 20 m 混合像元、河床/道路邊坡混入與官方崩塌清冊尺度差異。本次成果符合 ARIA v8.0 從「閾值偵測」升級到「多類別分類器」的精神，但 ROI 為本機自動 KMZ 流程產生，仍不等同人工 Google Earth 判釋；山區陰影、河床與崩塌光譜接近，會提高誤判。後續若要改進，我會加入 DEM slope/aspect、SAR coherence、道路距離，並人工修訂 ROI 與 FN 熱區。
 
 ## Output Checklist
 
